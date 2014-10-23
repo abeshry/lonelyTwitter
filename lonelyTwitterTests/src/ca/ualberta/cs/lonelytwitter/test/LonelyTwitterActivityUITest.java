@@ -22,7 +22,7 @@ public class LonelyTwitterActivityUITest extends
 	}
 
 	protected void setUp() throws Exception {
-		super.setUp();
+		super.setUp(); 
 		instrumentation = getInstrumentation();
 		activity = getActivity();
 		textInput = ((EditText) activity.findViewById(ca.ualberta.cs.lonelytwitter.R.id.body));
@@ -36,5 +36,18 @@ public class LonelyTwitterActivityUITest extends
 	}
 	
 //TODO: Add your code here:
-			
+	
+	@UiThreadTest
+	public void testMakeTweet() {
+		LonelyTwitterActivity lta = getActivity();
+		int oldLength = lta.getAdapter().getCount();
+		makeTweet("testing new element");
+		ArrayAdapter<NormalTweetModel> aa = lta.getAdapter();
+		assertEquals(aa.getCount(), oldLength+1);
+		
+		assertTrue(aa.getItem(aa.getCount()-1) instanceof NormalTweetModel);
+		
+		assertEquals(aa.getItem(aa.getCount()-1).getText(), "testing new element");
+		
+	}
 }

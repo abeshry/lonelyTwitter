@@ -16,5 +16,36 @@ public class IntentReaderActivityTest extends
     }
 
 //TODO: Add your code here:
+       public void testSendText() {
+    	   Intent intent = new Intent();
+    	   intent.putExtra(IntentReaderActivity.TEXT_TO_TRANSFORM_KEY, "testing send text");
+    	   
+    	   IntentReaderActivity ira = getActivity();
+    	   assertEquals(ira.getText(), "testing send text");
+    	   }
        
+       public void testDisplayText() {
+    	   Intent intent = new Intent();
+    	   intent.putExtra(IntentReaderActivity.TEXT_TO_TRANSFORM_KEY, "testing display");
+    	   
+    	   setActivityIntent(intent);
+    	   IntentReaderActivity ira = getActivity();
+    	   
+    	   TextView tv = (TextView)ira.findViewById(ca.ualberta.cs.lonelytwitter.R.id.intentText);
+    	   assertEquals(tv.getText(), "testing display");
+       }
+
+       public void testDoubleText() {
+    	   Intent intent = new Intent();
+    	   intent.putExtra(IntentReaderActivity.TEXT_TO_TRANSFORM_KEY, "Bye");
+    	   intent.putExtra(IntentReaderActivity.MODE_OF_TRANSFORM_KEY, IntentReaderActivity.DOUBLE);
+    	   
+    	   setActivityIntent(intent);
+    	   IntentReaderActivity ira = getActivity();
+    	   assertEquals(ira.getText(), "ByeBye");
+
+       }
+
+
 }
+
